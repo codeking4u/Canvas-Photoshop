@@ -8,16 +8,79 @@
     <link rel="stylesheet" href="dashboard/css/main.css">
   </head>
   <body>
-     <div id="includedContent"></div>
+     <div id="includedContent">
+
+        
+    <aside class="side-nav" id="show-side-navigation1">
+      <i class="fa fa-bars close-aside hidden-sm hidden-md hidden-lg" data-close="show-side-navigation1"></i>
+      <div class="heading">
+        <div class="info">
+          <h3><a href="#">Canva Draw</a></h3>
+        </div>
+      </div>
+      <ul class="categories">
+        <li><i class="fa fa-home fa-fw" aria-hidden="true"></i><a href="#"> Add Backgrounds</a>
+          <ul class="side-nav-dropdown">
+            <li><a href="#">Lorem ipsum</a></li>
+            <li><a href="#">ipsum dolor</a></li>
+            <li><a href="#">dolor ipsum</a></li>
+            <li><a href="#">amet consectetur</a></li>
+            <li><a href="#">ipsum dolor sit</a></li>
+          </ul>
+        </li>
+        <li><i class="fa fa-support fa-fw"></i><a href="#"> Add Stock Images</a>
+          <div class="side-nav-dropdown stock-images">
+            <img draggable="true" src="media/img/a.png" alt="">
+            <img draggable="true" src="media/img/b.png" alt="">
+            <img draggable="true" src="" alt="">
+          </div>
+        </li>
+        <li><i class="fa fa-support fa-fw"></i><a href="#"> Insert Text</a>
+          <ul class="side-nav-dropdown">
+            <li><a href="#">Lorem ipsum</a></li>
+            <li><a href="#">ipsum dolor</a></li>
+            <li><a href="#">dolor ipsum</a></li>
+            <li><a href="#">amet consectetur</a></li>
+            <li><a href="#">ipsum dolor sit</a></li>
+          </ul>
+        </li>
+        <li><i class="fa fa-support fa-fw"></i><a href="#"> Add Shapes</a>
+          <ul class="side-nav-dropdown">
+            <li><a href="#">Lorem ipsum</a></li>
+            <li><a href="#">ipsum dolor</a></li>
+            <li><a href="#">dolor ipsum</a></li>
+            <li><a href="#">amet consectetur</a></li>
+            <li><a href="#">ipsum dolor sit</a></li>
+          </ul>
+        </li>
+      </ul>
+    </aside>
+    <div class='canvas-section'>
+        <canvas id="canvas" width="700" height="400"></canvas>
+    </div>
+    <section id="contents">
+      
+      <div class="welcome">
+              <div class="content">
+                <div class="elements-in-canvas"></div>
+                <div class="elements-in-canvas"></div>
+                <div class="elements-in-canvas"></div>
+              </div>
+      </div>
+      </section>
+
+     </div>
      
   <script src='http://code.jquery.com/jquery-latest.js'></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
   <script> 
     $(function(){
-      $("#includedContent").load("dashboard/dashboard.html"); 
+     // $("#includedContent").load("dashboard/dashboard.html"); 
     });
     </script>
     <script src='dashboard/js/main.js'></script>
+    <script src='dashboard/js/canvas.js'></script>
   </body>
 </html>>
