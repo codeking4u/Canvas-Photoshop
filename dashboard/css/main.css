@@ -205,8 +205,11 @@
     border: 1px solid rgb(158, 158, 158);
     padding: 5px;
     margin: 2px;
-    cursor: pointer;
+    cursor: grab;
     
+  }
+  .img_dragging{
+    cursor: grabbing;
   }
   .stock-images > img:hover{
     border: 1px solid rgb(212, 210, 210);
@@ -257,6 +260,7 @@
     margin: 3px 0px;
     border: 1px solid #bcbcbf;
     background: #1a1a1a;
+    cursor:all-scroll;
   }
   
   /* Start statistics */

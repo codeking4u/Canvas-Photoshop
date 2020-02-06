@@ -59,11 +59,8 @@ $(function () {
       });
   
       $('.side-nav .close-aside').on('click', function () {
-  
         $('#' + $(this).data('close')).addClass('show-side-nav');
-  
         contents.removeClass('margin');
-  
       });
   
     }());

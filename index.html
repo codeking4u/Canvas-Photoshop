@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
     <link rel="stylesheet" href="dashboard/css/main.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   </head>
   <body>
      <div id="includedContent">
@@ -21,20 +22,20 @@
       <ul class="categories">
         <li><i class="fa fa-home fa-fw" aria-hidden="true"></i><a href="#"> Add Backgrounds</a></li>
           <div class="side-nav-dropdown stock-images bg-images">
-            <img draggable="true" class="bg" src="media/bg/a (1).jpg" alt="">
-            <img draggable="true" class="bg" src="media/bg/a (2).jpg" alt="">
-            <img draggable="true" class="bg" src="media/bg/a (3).jpg" alt="">
-            <img draggable="true" class="bg" src="media/bg/a (4).jpg" alt="">
-            <img draggable="true" class="bg" src="media/bg/a (5).jpg" alt="">
+            <img draggable="true" class="bg" id="bg_1" src="media/bg/a (1).jpg" alt="">
+            <img draggable="true" class="bg" id="bg_2" src="media/bg/a (2).jpg" alt="">
+            <img draggable="true" class="bg" id="bg_3" src="media/bg/a (3).jpg" alt="">
+            <img draggable="true" class="bg" id="bg_4" src="media/bg/a (4).jpg" alt="">
+            <img draggable="true" class="bg" id="bg_5" src="media/bg/a (5).jpg" alt="">
           </div>
         
         <li><i class="fa fa-support fa-fw"></i><a href="#"> Add Stock Images</a></li>
           <div class="side-nav-dropdown stock-images">
-            <img draggable="true" src="media/img/a.png" alt="">
-            <img draggable="true" src="media/img/b.png" alt="">
-            <img draggable="true" src="media/img/c.png" alt="">
-            <img draggable="true" src="media/img/d.png" alt="">
-            <img draggable="true" src="media/img/e.png" alt="">
+            <img draggable="true" id="stk_1" src="media/img/a.png" alt="">
+            <img draggable="true" id="stk_2" src="media/img/b.png" alt="">
+            <img draggable="true" id="stk_3" src="media/img/c.png" alt="">
+            <img draggable="true" id="stk_4" src="media/img/d.png" alt="">
+            <img draggable="true" id="stk_5" src="media/img/e.png" alt="">
           </div>
         <li><i class="fa fa-support fa-fw"></i><a href="#"> Insert Text</a></li>
           <ul class="side-nav-dropdown">
@@ -61,9 +62,6 @@
       
       <div class="welcome">
               <div class="content">
-                <div class="elements-in-canvas"></div>
-                <div class="elements-in-canvas"></div>
-                <div class="elements-in-canvas"></div>
               </div>
       </div>
       </section>
@@ -74,6 +72,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script> 
     $(function(){
      // $("#includedContent").load("dashboard/dashboard.html"); 

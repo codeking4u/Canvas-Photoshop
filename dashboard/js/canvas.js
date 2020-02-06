@@ -5,53 +5,50 @@ var canvas = new fabric.Canvas('canvas');
 function handleDragStart(e) {
     [].forEach.call(images, function (img) {
         img.classList.remove('img_dragging');
+        
     });
     console.log('hello ji');
     this.classList.add('img_dragging');
+    
 }
 
 function handleDragOver(e) {
     if (e.preventDefault) {
-        e.preventDefault(); // Necessary. Allows us to drop.
+        e.preventDefault(); 
     }
-
-    e.dataTransfer.dropEffect = 'copy'; // See the section on the DataTransfer object.
-    // NOTE: comment above refers to the article (see top) -natchiketa
+    e.dataTransfer.dropEffect = 'copy'; 
 
     return false;
 }
 
 function handleDragEnter(e) {
-    // this / e.target is the current hover target.
     this.classList.add('over');
 }
 
 function handleDragLeave(e) {
-    this.classList.remove('over'); // this / e.target is previous target element.
+    this.classList.remove('over'); 
 }
 
 function handleDrop(e) {
-    // this / e.target is current target element.
-
     if (e.stopPropagation) {
-        e.stopPropagation(); // stops the browser from redirecting.
+        e.stopPropagation(); 
     }
 
     var img = document.querySelector('.stock-images img.img_dragging');
     if(img.classList.contains('bg')){
-        addImage(img.src)
+        addImage(img.src);
     }else{
         var newImage = new fabric.Image(img, {
             width: img.width*2,
             height: img.height*2,
-            // Set the center of the new object based on the event coordinates relative
-            // to the canvas container.
             left: e.layerX-(img.width*2/2),
-            top: e.layerY-(img.height*2/2)
+            top: e.layerY-(img.height*2/2),
+            name:img.id,
+            id:ID()
         });
         canvas.add(newImage);
     }
-    
+    updateSidelog()
 
     return false;
 }
@@ -60,19 +57,17 @@ function handleDragEnd(e) {
     // this/e.target is the source node.
     [].forEach.call(images, function (img) {
         img.classList.remove('img_dragging');
+        img.style.cursor = 'grab';
     });
+    
 }
 
 if (Modernizr.draganddrop) {
-    // Browser supports HTML5 DnD.
-
-    // Bind the event listeners for the image elements
     var images = document.querySelectorAll('.stock-images img');
     [].forEach.call(images, function (img) {
         img.addEventListener('dragstart', handleDragStart, false);
         img.addEventListener('dragend', handleDragEnd, false);
     });
-    // Bind the event listeners for the canvas
     var canvasContainer = document.querySelector('.canvas-section');
     console.log(canvasContainer);
     canvasContainer.addEventListener('dragenter', handleDragEnter, false);
@@ -83,7 +78,7 @@ if (Modernizr.draganddrop) {
     // Replace with a fallback to a library solution.
     alert("This browser doesn't support the HTML5 Drag and Drop API.");
 }
-addImage('media/img/a.png');
+
 function addImage(url){
     canvas.getObjects().forEach(function(o){
         if(o.id=="background_img"){
@@ -104,7 +99,7 @@ function addImage(url){
      }
      final_width = canvas.width;
      final_height = final_width/ imageRatio;
-     var myImg = myImg.set({ id:"background_img",left: 0, top: 0 ,width:final_width,height:final_height,selectable: false});
+     var myImg = myImg.set({ id:"background_img",name:"Background Img",left: 0, top: 0 ,width:final_width,height:final_height,selectable: false});
      myImg.hoverCursor = 'default';
      
      canvas.add(myImg); 
@@ -113,11 +108,44 @@ function addImage(url){
             canvas.sendToBack(o);
         }
     });
+    updateSidelog();
     });
+    
   }
   document.querySelector('.bg-images').addEventListener('click',function(e){
       if(e.target.classList.contains('bg')){
         addImage(e.target.src);
       }
   });
+  function updateSidelog(){
+    var list ="";
+    canvas.getObjects().forEach(function(o){
+        console.log(o);
+        list += "<div class='elements-in-canvas' id='"+o.id+"'>"+o.name+"</div>";
+    });
+    document.querySelector('.content').innerHTML=list;
+    $('.content').sortable({
+        axis: 'y',
+        containment: 'parent',
+        update: function( event, ui ) {
+            console.log();
+            var sortingArr =$('.content').sortable('toArray');
+            sortingArr.forEach(function(e){
+                canvas.getObjects().forEach(function(o){  
+                    if(o.id==e){
+                        canvas.bringForward(o);
+                    }
+                });
+            });
+            
+            canvas.renderAll();
+        }
+    });
+}
+
+var ID = function () {
+    return '_' + Math.random().toString(36).substr(2, 9);
+  };
+
 })();
+
