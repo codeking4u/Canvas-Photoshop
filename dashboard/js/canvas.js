@@ -37,13 +37,23 @@ function handleDrop(e) {
     var img = document.querySelector('.stock-images img.img_dragging');
     if(img.classList.contains('bg')){
         addImage(img.src);
+    }else  if(img.classList.contains('text-article')){
+        addText( e.layerX, e.layerY);
     }else{
+        var zoom = 5;
+        if(img.classList.contains('shape')){
+            zoom= 1;
+        }
         var newImage = new fabric.Image(img, {
-            width: img.width*2,
-            height: img.height*2,
+            width: img.width*zoom,
+            height: img.height*zoom,
             left: e.layerX-(img.width*2/2),
             top: e.layerY-(img.height*2/2),
             name:img.id,
+            borderColor: '#e0dddd',
+            cornerColor: '#e0dddd',
+            cornerSize: 10,
+            transparentCorners: false,
             id:ID()
         });
         canvas.add(newImage);
@@ -90,6 +100,7 @@ function addImage(url){
      var final_width =myImg.width;
      var final_height = myImg.height;
      var imageRatio = myImg.width/myImg.height;
+     console.log(final_width,final_height,'first',imageRatio)
      if(myImg.width>window.fullwidth){
          //final_width = max_w_pos
       final_height = final_width/ imageRatio;
@@ -99,6 +110,7 @@ function addImage(url){
      }
      final_width = canvas.width;
      final_height = final_width/ imageRatio;
+     
      var myImg = myImg.set({ id:"background_img",name:"Background Img",left: 0, top: 0 ,width:final_width,height:final_height,selectable: false});
      myImg.hoverCursor = 'default';
      
@@ -108,6 +120,7 @@ function addImage(url){
             canvas.sendToBack(o);
         }
     });
+    canvas.renderAll();
     updateSidelog();
     });
     
@@ -146,6 +159,28 @@ function addImage(url){
 var ID = function () {
     return '_' + Math.random().toString(36).substr(2, 9);
   };
+
+
+  //Text
+  function addText(x,y){
+    var textbox = new fabric.IText('Sample Text', {
+        left: x,
+        top: y,
+        width: 150,
+        fontSize: 25,
+        fontFamily:"Pacifico",
+        name:"Text",
+        id:ID(),
+        borderColor: '#e0dddd',
+        cornerColor: '#e0dddd',
+        cornerSize: 10,
+        transparentCorners: false,
+      });
+      canvas.add(textbox).setActiveObject(textbox);
+      
+      
+  }
+  
 
 })();
 
