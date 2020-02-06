@@ -200,8 +200,16 @@
     flex-wrap: wrap;
   }
   .stock-images > img{
-    max-width: 85px;
-    max-height: 64px
+    width: 64px;
+    height: 64px;
+    border: 1px solid rgb(158, 158, 158);
+    padding: 5px;
+    margin: 2px;
+    cursor: pointer;
+    
+  }
+  .stock-images > img:hover{
+    border: 1px solid rgb(212, 210, 210);
   }
   /* End dropdown menu */
   

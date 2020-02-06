@@ -41,21 +41,20 @@ $(function () {
       // dropdown menu in the side nav
       var slideNavDropdown = $('.side-nav-dropdown');
   
-      $('#includedContent').on('click', '.side-nav .categories li',function () {
-  
+      $('#includedContent').on('click', '.side-nav .categories li',function (e) {
+        console.log($(this).find('.side-nav-dropdown').length);
+        
         $(this).toggleClass('opend').siblings().removeClass('opend');
-  
-        if ($(this).hasClass('opend')) {
-  
-          $(this).find('.side-nav-dropdown').slideToggle('fast');
-  
-          $(this).siblings().find('.side-nav-dropdown').slideUp('fast');
-  
-        } else {
-  
-          $(this).find('.side-nav-dropdown').slideUp('fast');
-  
-        }
+    
+          if ($(this).hasClass('opend')) {
+            $('.side-nav-dropdown').slideUp('fast');
+            $(this).next('.side-nav-dropdown').slideToggle('fast');
+            
+          } else {
+            
+              $(this).next('.side-nav-dropdown').slideUp('fast');
+          }
+          
   
       });
   

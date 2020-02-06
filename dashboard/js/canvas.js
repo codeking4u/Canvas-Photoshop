@@ -1,13 +1,6 @@
 (function(){
-
-/* Drag and Drop code adapted from http://www.html5rocks.com/en/tutorials/dnd/basics/ */
-
+    
 var canvas = new fabric.Canvas('canvas');
-
-/* 
-NOTE: the start and end handlers are events for the <img> elements; the rest are bound to 
-the canvas container.
-*/
 
 function handleDragStart(e) {
     [].forEach.call(images, function (img) {
@@ -45,18 +38,20 @@ function handleDrop(e) {
     }
 
     var img = document.querySelector('.stock-images img.img_dragging');
-
-    console.log('event: ', e);
-
-    var newImage = new fabric.Image(img, {
-        width: img.width*2,
-        height: img.height*2,
-        // Set the center of the new object based on the event coordinates relative
-        // to the canvas container.
-        left: e.layerX-(img.width*2/2),
-        top: e.layerY-(img.height*2/2)
-    });
-    canvas.add(newImage);
+    if(img.classList.contains('bg')){
+        addImage(img.src)
+    }else{
+        var newImage = new fabric.Image(img, {
+            width: img.width*2,
+            height: img.height*2,
+            // Set the center of the new object based on the event coordinates relative
+            // to the canvas container.
+            left: e.layerX-(img.width*2/2),
+            top: e.layerY-(img.height*2/2)
+        });
+        canvas.add(newImage);
+    }
+    
 
     return false;
 }
@@ -88,5 +83,41 @@ if (Modernizr.draganddrop) {
     // Replace with a fallback to a library solution.
     alert("This browser doesn't support the HTML5 Drag and Drop API.");
 }
-
+addImage('media/img/a.png');
+function addImage(url){
+    canvas.getObjects().forEach(function(o){
+        if(o.id=="background_img"){
+            canvas.remove(o);
+        }
+    });
+    console.log(canvas.getObjects().length)
+    fabric.Image.fromURL(url, function(myImg) {
+     var final_width =myImg.width;
+     var final_height = myImg.height;
+     var imageRatio = myImg.width/myImg.height;
+     if(myImg.width>window.fullwidth){
+         //final_width = max_w_pos
+      final_height = final_width/ imageRatio;
+      
+     }else{
+     
+     }
+     final_width = canvas.width;
+     final_height = final_width/ imageRatio;
+     var myImg = myImg.set({ id:"background_img",left: 0, top: 0 ,width:final_width,height:final_height,selectable: false});
+     myImg.hoverCursor = 'default';
+     
+     canvas.add(myImg); 
+     canvas.getObjects().forEach(function(o){
+        if(o.id=="background_img"){
+            canvas.sendToBack(o);
+        }
+    });
+    });
+  }
+  document.querySelector('.bg-images').addEventListener('click',function(e){
+      if(e.target.classList.contains('bg')){
+        addImage(e.target.src);
+      }
+  });
 })();
